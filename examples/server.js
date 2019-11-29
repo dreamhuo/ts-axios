@@ -31,7 +31,7 @@ app.use(express.static(__dirname, {
     res.cookie('XSRF-TOKEN-D', '1234abc')
   }
 }))
-// 用来解析发送过来的request body
+// 用来解析发送过来的request body 里的数据
 app.use(bodyParser.json())
 // app.use(bodyParser.text())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -62,6 +62,7 @@ registerMoreRouter()
 app.use(router)
 
 const port = process.env.PORT || 8080
+// 通过 app.listen 启动一个服务器
 module.exports = app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}, Ctrl+C to stop`)
 })
