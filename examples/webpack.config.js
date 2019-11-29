@@ -12,6 +12,7 @@ module.exports = {
    * app.ts 作为 webpack 构建的入口文件
    * entries 收集了多目录个入口文件，并且每个入口还引入了一个用于热更新的文件
    * entries 是一个对象，key 为目录名
+   * entry 是一个多入口的
    */
   entry: fs.readdirSync(__dirname).reduce((entries, dir) => {
     const fullDir = path.join(__dirname, dir)
@@ -25,6 +26,7 @@ module.exports = {
 
   /**
    * 根据不同的目录名称，打包生成目标 js，名称和目录名一致
+   * output 是唯一的
    */
   output: {
     path: path.join(__dirname, '__build__'),
@@ -68,7 +70,9 @@ module.exports = {
   },
 
   plugins: [
+    // 热更新插件
     new webpack.HotModuleReplacementPlugin(),
+    // 派发错误插件
     new webpack.NoEmitOnErrorsPlugin()
   ]
 }
