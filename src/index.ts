@@ -2,6 +2,7 @@ import { AxiosRequestConfig } from './types'
 import xhr from './xhr'
 import { buildURL } from './helpers/url'
 import { transformRequest } from './helpers/data'
+import { processHeaders } from './helpers/headers'
 
 // 指定 config 类型
 function axios(config: AxiosRequestConfig): void {
@@ -21,6 +22,11 @@ function transformURL(config: AxiosRequestConfig): string {
 // 对 Request data 进行处理
 function transformRequestData(config: AxiosRequestConfig) {
   return transformRequest(config.data)
+}
+// 对 headers 进行处理
+function transforHeaders(config: AxiosRequestConfig): any {
+  const { headers = {}, data } = config
+  return processHeaders(headers, data)
 }
 
 export default axios
