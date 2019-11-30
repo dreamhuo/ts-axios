@@ -12,6 +12,7 @@ function axios(config: AxiosRequestConfig): void {
 // 在发送请求之前，对 config 进行一层处理
 function processConfig(config: AxiosRequestConfig): void {
   config.url = transformURL(config)
+  config.headers = transforHeaders(config)
   config.data = transformRequestData(config)
 }
 // 对 config 的 url 做处理
