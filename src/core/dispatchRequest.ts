@@ -1,11 +1,11 @@
-import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
-import xhr from './core/xhr'
-import { buildURL } from './helpers/url'
-import { transformRequest, transformResponse } from './helpers/data'
-import { processHeaders } from './helpers/headers'
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
+import xhr from './xhr'
+import { buildURL } from '../helpers/url'
+import { transformRequest, transformResponse } from '../helpers/data'
+import { processHeaders } from '../helpers/headers'
 
 // 指定 config 类型
-function axios(config: AxiosRequestConfig): AxiosPromise {
+export default function dispatchRequest(config: AxiosRequestConfig): AxiosPromise {
   processConfig(config)
   return xhr(config).then(res => {
     return transformResponseData(res)
@@ -20,7 +20,8 @@ function processConfig(config: AxiosRequestConfig): void {
 // 对 config 的 url 做处理
 function transformURL(config: AxiosRequestConfig): string {
   const { url, params } = config
-  return buildURL(url, params)
+  // 这里类型断言不为空，加 ！号
+  return buildURL(url!, params)
 }
 // 对 Request data 进行处理
 function transformRequestData(config: AxiosRequestConfig) {
@@ -36,5 +37,3 @@ function transformResponseData(res: AxiosResponse): AxiosResponse {
   res.data = transformResponse(res.data)
   return res
 }
-
-export default axios

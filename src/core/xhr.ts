@@ -1,9 +1,9 @@
 // 实现所有请求逻辑
 
-import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from '../types'
 
-import { parseHeaders } from './helpers/headers'
-import { createError } from './helpers/error'
+import { parseHeaders } from '../helpers/headers'
+import { createError } from '../helpers/error'
 
 export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
@@ -16,7 +16,7 @@ export default function xhr(config: AxiosRequestConfig): AxiosPromise {
       request.timeout = timeout
     }
     // 默认异步
-    request.open(method.toUpperCase(), url, true)
+    request.open(method.toUpperCase(), url!, true)
     request.onreadystatechange = function handleLoad() {
       if (request.readyState !== 4) {
         return
