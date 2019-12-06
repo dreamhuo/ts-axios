@@ -10,6 +10,9 @@ axios({
   data: qs.stringify({
     a: 1
   }),
+  // data: {
+  //   a: 1
+  // },
   headers: {
     test: '321'
   }
