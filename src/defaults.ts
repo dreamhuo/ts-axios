@@ -7,7 +7,9 @@ const defaults: AxiosRequestConfig = {
     common: {
       Accept: 'application/json, text/plain, */*'
     }
-  }
+  },
+  transformRequest: [],
+  transformResponse: []
 }
 
 const methodsNoData = ['delete', 'get', 'head', 'options']
